@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: white;
+  /* --head-text: #32325D;
+  --text:#525F7F;
+  --soft-text: #8898AA; */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* color: (var(--text)); */
+  background: var(--bg)
+}
+
+main{
+  @apply text-textc w-full
+}
