@@ -89,6 +89,11 @@ export const editData = async (path_url, requires_token, data) => {
     }
 };
 
+// Alias for editData to maintain consistency with naming conventions
+export const putData = async (path_url, data, requires_token) => {
+    return await editData(path_url, requires_token, data);
+};
+
 export const deleteData = async (path_url, requires_token) => {
     let token = "";
     if (requires_token) {

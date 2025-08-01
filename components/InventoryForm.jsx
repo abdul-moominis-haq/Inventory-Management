@@ -156,7 +156,25 @@ const InventoryForm = () => {
                                     required
                                 >
                                     <option disabled value="">Select</option>
-                                    {/* Add unit options here */}
+                                    <option value="pieces">Pieces (pcs)</option>
+                                    <option value="kilograms">Kilograms (kg)</option>
+                                    <option value="grams">Grams (g)</option>
+                                    <option value="liters">Liters (L)</option>
+                                    <option value="milliliters">Milliliters (mL)</option>
+                                    <option value="meters">Meters (m)</option>
+                                    <option value="centimeters">Centimeters (cm)</option>
+                                    <option value="boxes">Boxes</option>
+                                    <option value="sets">Sets</option>
+                                    <option value="pairs">Pairs</option>
+                                    <option value="dozens">Dozens</option>
+                                    <option value="cartons">Cartons</option>
+                                    <option value="rolls">Rolls</option>
+                                    <option value="sheets">Sheets</option>
+                                    <option value="bottles">Bottles</option>
+                                    <option value="cans">Cans</option>
+                                    <option value="bags">Bags</option>
+                                    <option value="packs">Packs</option>
+                                    <option value="units">Units</option>
                                 </select>
                             </div>
 

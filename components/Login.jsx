@@ -18,10 +18,39 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
 
-    const formData = { email, password };
-    console.log('Form Data:', formData);
+    // Temporary hardcoded authentication for testing
+    const TEMP_USERNAME = "admin";
+    const TEMP_PASSWORD = "admin2211";
 
     try {
+      // Check against hardcoded credentials first
+      if (email === TEMP_USERNAME && password === TEMP_PASSWORD) {
+        const mockResponse = {
+          token: "temp-auth-token-" + Date.now(),
+          user: {
+            id: 1,
+            email: TEMP_USERNAME,
+            name: "Administrator",
+            roles: ["admin"],
+            permissions: ["read", "write", "delete"]
+          },
+          expiry: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+        };
+
+        localStorage.setItem("fh_user", JSON.stringify(mockResponse));
+        setNotification({ type: 'success', message: 'Login Successful' });
+        
+        setTimeout(() => {
+          router.replace("/");
+        }, 1000);
+        
+        return;
+      }
+
+      // If not hardcoded credentials, try API call
+      const formData = { email, password };
+      console.log('Form Data:', formData);
+
       const response = await postData('login', false, formData);
       console.log('Login Response:', response);
 
@@ -34,7 +63,12 @@ export default function LoginPage() {
       }
     } catch (error) {
       console.error('Error:', error);
-      setNotification({ type: 'error', message: error });
+      if (email !== TEMP_USERNAME || password !== TEMP_PASSWORD) {
+        setNotification({ 
+          type: 'error', 
+          message: 'Invalid credentials. Use "admin" / "admin2211" for testing or check API connection.' 
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -51,12 +85,12 @@ export default function LoginPage() {
             onClose={() => setNotification(null)}
           />
         )}
-        <p>Enter your email and password to sign in</p>
+        <p>Enter your username and password to sign in</p>
         <label className="block font-bold mb-2">
-          Email
+          Username/Email
           <input
-            type="email"
-            placeholder="Email"
+            type="text"
+            placeholder="Username or Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded"
